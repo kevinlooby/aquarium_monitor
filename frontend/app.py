@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, session, send_from_directory, redirect
 from flask_cors import CORS
 
-from frontend.controllers import index_bp
+from controllers import index_bp
 
 # Create the Flask app and RESTful API
 app = Flask(__name__)
