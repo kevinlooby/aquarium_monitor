@@ -4,6 +4,16 @@
     Home
 {% endblock %}
 
+{% block head %}
+    <script src="/js/parameters_plot.js"></script>
+{% endblock %}
+
 {% block content %}
-    Placeholder
+    <div class="card card-body" id="parameters">
+        <div class="d-flex justify-content-center" id="plot_spinner">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Data should be around here somewhere...</span>
+            </div>
+        </div>
+    </div>
 {% endblock %}
