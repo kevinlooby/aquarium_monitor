@@ -16,7 +16,7 @@ CORS(app)
 app.register_blueprint(index_bp)
 
 
-# Handled 404 errors
+# Handle 404 errors
 @app.errorhandler(404)
 def page_not_found_error(error):
     return render_template('pages/error.html'), 404
