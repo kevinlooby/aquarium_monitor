@@ -31,7 +31,7 @@ def index(path=None):
 # Serve static JS files
 @app.route('/js/<path:filename>')
 def serve_static(filename):
-    return send_from_directory(os.path.join('../backend', 'static', 'js'), filename)
+    return send_from_directory(os.path.join('../frontend', 'static', 'js'), filename)
 
 
 if __name__ == '__main__':

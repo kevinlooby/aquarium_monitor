@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $.ajax({
         dataType: "json",
-        url: "http://localhost:8090/NOTIMPLEMENTED"
+        url: "http://localhost:8090/data",
         success: function (data) {
 
             $("#plot_spinner").remove()
@@ -18,16 +18,16 @@ $(document).ready(function () {
                 xAxis: {
                     tickInterval: 24 * 3600 * 1000,
                     type: 'datetime',
-                }
+                },
                 series: [
-                    {name: 'pH'},
-                    data: data['pH'],
-                    lineWidth: 1,
-                    tooltip: {valueDecimals: 1},
-                ]
-            })
-
+                    {
+                        name: 'pH',
+                        data: data['ph'],
+                        lineWidth: 1,
+                        tooltip: {valueDecimals: 1},
+                    },
+                ],
+            });
         }
-    })
-
-})
+    });
+});
