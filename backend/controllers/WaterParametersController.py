@@ -18,6 +18,7 @@ class WaterParametersController(Resource):
             }
 
             response = jsonify(data)
+            response.headers["Access-Control-Allow-Origin"] = "*"
 
         except KeyError:
             response = jsonify("Invalid request")

@@ -1,9 +1,8 @@
-
 $(document).ready(function () {
 
     $.ajax({
         dataType: "json",
-        url: "http://localhost:8090/data",
+        url: "http://192.168.1.228:8090/data",
         success: function (data) {
 
             $("#plot_spinner").remove()
