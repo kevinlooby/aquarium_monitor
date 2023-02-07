@@ -30,9 +30,8 @@ def decimal_default(obj):
 
 class MySQLConnector:
 
-    def __init__(self, port, db_name, endpoint, user, password):
+    def __init__(self, port, db_name, host, user, password):
         """
-        TODO : Not sure how to describe the purpose of this class
 
         Parameters
         ----------
@@ -42,7 +41,7 @@ class MySQLConnector:
         db_name : str
             Name of the database to be connected on the instance
 
-        endpoint : str
+        host : str
             Endpoint URL to connect to MySQL AWS RDS instance
 
         user : str
@@ -56,7 +55,7 @@ class MySQLConnector:
         self.port = port
         self.db_name = db_name
         self.user = user
-        self.endpoint = endpoint
+        self.host = host
         self.password = password
         self.conn = None
 
@@ -66,7 +65,7 @@ class MySQLConnector:
 
         """
 
-        self.conn = pymysql.connect(host=self.endpoint, port=self.port, user=self.user, passwd=self.password,
+        self.conn = pymysql.connect(host=self.host, user=self.user, passwd=self.password,
                                     db=self.db_name)
 
     def mysql_close(self):

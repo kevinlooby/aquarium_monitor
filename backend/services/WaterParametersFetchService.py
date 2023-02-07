@@ -9,7 +9,7 @@ class WaterParametersFetchService(Resource):
         self.repository = WaterParametersFetchRepository()
 
     def get_ph(self):
-        return list(self.repository.get_ph())
+        return self.repository.get_temperature()
 
     def get_temperature(self):
-        return list(self.repository.get_temperature())
+        return self.repository.get_temperature()

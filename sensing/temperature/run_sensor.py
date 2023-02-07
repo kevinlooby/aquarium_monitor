@@ -42,22 +42,19 @@ def parse_temperature(content):
 def write_to_db_proto(timestamp, temperature):
     connection = pymysql.connect(user='admin', password='password', database='aquarium_monitor', host='localhost')
     cursor = connection.cursor()
-    #cursor.execute('SHOW ENGINE INNODB STATUS;')
     message = "INSERT INTO temperature (timestamp, value) VALUES ({}, {});".format(int(timestamp), temperature)
     ret = cursor.execute(message)
     connection.commit()
     connection.close()
-    print("{} {}".format(message, ret))
 
 
 def main():
     device_file = initialize_device()
 
-    for i in range(30):
+    while True:
         content = read_file(device_file)
         temp = parse_temperature(content)
         write_to_db_proto(time.time(), temp)
-        print(temp)
 
         time.sleep(1)
 
