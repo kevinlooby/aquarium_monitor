@@ -4,13 +4,15 @@ import numpy as np
 
 class WaterParametersFetchRepository(BaseRepository):
 
-    def __int__(self, config_path):
+    def __init__(self, config_path):
         super().__init__(config_path)
         self.load_config()
-        self.db_table = self.config['db_configuration']
+        self.db_tables = self.config['db_tables']
+        self.load_db(self.config['db_configuration'])
 
     def get_temperature(self):
-        query_str = f"select timestamp, value from {self.config['db_tables']['temperature']};"
+        query_str = "select timestamp, value from {};".format(self.config['db_tables']['temperature'])
+
         result = self.execute_query(query_str)
         return result
 

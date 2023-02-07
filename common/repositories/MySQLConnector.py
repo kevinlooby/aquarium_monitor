@@ -30,7 +30,7 @@ def decimal_default(obj):
 
 class MySQLConnector:
 
-    def __init__(self, port, db_name, host, user, password):
+    def __init__(self, host, database, user, password):
         """
 
         Parameters
@@ -52,8 +52,7 @@ class MySQLConnector:
 
         """
 
-        self.port = port
-        self.db_name = db_name
+        self.database = database
         self.user = user
         self.host = host
         self.password = password
@@ -66,7 +65,7 @@ class MySQLConnector:
         """
 
         self.conn = pymysql.connect(host=self.host, user=self.user, passwd=self.password,
-                                    db=self.db_name)
+                                    db=self.database)
 
     def mysql_close(self):
         """

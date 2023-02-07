@@ -11,9 +11,10 @@ class BaseRepository:
 
     def load_config(self):
         with open(self.config_path, 'r') as f:
-            self.config = yaml.load(f)
+            print(self.config_path)
+            self.config = yaml.safe_load(f)
 
-    def load_db(self, port, db, db_endpoint, db_user, db_password):
+    def load_db(self, config):
         """
         Adds an instance of MySQLConnector as an attribute for interfacing with mySQL
 
@@ -35,7 +36,7 @@ class BaseRepository:
             Password associated with database username
 
         """
-        self.db = MySQLConnector(port, db, db_endpoint, db_user, db_password)
+        self.db = MySQLConnector(**config)
 
     def db_connect(self):
         self.db.mysql_connect()
