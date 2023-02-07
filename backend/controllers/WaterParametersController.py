@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_restful import Resource, Api
 
-from services import WaterParametersFetchService
+from backend.services import WaterParametersFetchService
 
 
 class WaterParametersController(Resource):
@@ -11,10 +11,12 @@ class WaterParametersController(Resource):
 
     def get(self):
         ph = self.parameters_fetch_service.get_ph()
+        temperature = self.parameters_fetch_service.get_temperature()
 
         try:
             data = {
                 'ph': ph,
+                'temperature': temperature,
             }
 
             response = jsonify(data)

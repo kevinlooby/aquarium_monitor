@@ -2,6 +2,7 @@ import os
 import glob
 import re
 import time
+import pymysql
 
 
 def initialize_device():
@@ -33,9 +34,15 @@ def parse_temperature(content):
             t = float(text) / 1000 * 9/5 + 32
         except TypeError:
             t = -1
-            print(content[1])
+            # print(content[1])
 
     return t
+
+
+def write_to_db_proto(timestamp, temperature):
+    connection = pymysql.connect(user='admin', password='', database='aquarium_monitor', host='localhost')
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO aquarium_monitor (timestamp, value) VALUES ({}, {});".format(timestamp, temperature))
 
 
 def main():
@@ -44,6 +51,7 @@ def main():
     for i in range(30):
         content = read_file(device_file)
         temp = parse_temperature(content)
+        write_to_db_proto(time.time(), temp)
         print(temp)
 
         time.sleep(1)

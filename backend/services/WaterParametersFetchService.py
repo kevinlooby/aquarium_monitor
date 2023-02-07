@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from repositories.WaterParametersFetchRepository import WaterParametersFetchRepository
+from backend.repositories.WaterParametersFetchRepository import WaterParametersFetchRepository
 
 
 class WaterParametersFetchService(Resource):
@@ -10,3 +10,6 @@ class WaterParametersFetchService(Resource):
 
     def get_ph(self):
         return list(self.repository.get_ph())
+
+    def get_temperature(self):
+        return list(self.repository.get_temperature())
