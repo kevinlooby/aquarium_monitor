@@ -23,12 +23,17 @@ def read_file(device_file):
 
 
 def parse_temperature(content):
-    pattern = re.compile('t=*\d')
+    pattern = re.compile('t=')
 
     if 'YES' not in content[0]:
         t = -1
     else:
-        t = float(pattern.match(content[1])[0]) / 1000 * 9/5 + 32
+        try:
+            text = pattern.split(content[1])[1]
+            t = float(text) / 1000 * 9/5 + 32
+        except TypeError:
+            t = -1
+            print(content[1])
 
     return t
 
@@ -36,7 +41,7 @@ def parse_temperature(content):
 def main():
     device_file = initialize_device()
 
-    while True:
+    for i in range(30):
         content = read_file(device_file)
         temp = parse_temperature(content)
         print(temp)
