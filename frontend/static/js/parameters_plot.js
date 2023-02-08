@@ -13,19 +13,30 @@ $(document).ready(function () {
             Highcharts.stockChart('parameters_plot', {
                 rangeSelector: {selected: 2},
                 title: {text: 'Water Parameters'},
-                chart: {displayErrors: true},
-                xAxis: {
-                    tickInterval: 24 * 3600 * 1000,
-                    type: 'datetime',
+                chart: {
+                    displayErrors: true,
+                    zoomType: 'x',
                 },
                 series: [
                     {
-                        name: 'pH',
-                        data: data['ph'],
+                        name: 'Temperature',
+                        data: (() => {
+                            return data['temperature'].map(function(point) {
+                            return [Date.parse(point[0]), point[1]]})
+                        })(),
+                        type: 'line',
                         lineWidth: 1,
-                        tooltip: {valueDecimals: 1},
+                        tooltip: {valueDecimals: 2},
                     },
                 ],
+                xAxis: {
+                    ordinal: false,
+                    type: 'datetime',
+                    categories: data['temperature'][0],
+                    labels: {
+                        format: '{value:%Y-%b-%e %l:%M %p }'
+                    },
+                },
             });
         }
     });
