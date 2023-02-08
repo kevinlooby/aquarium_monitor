@@ -18,3 +18,5 @@ class WaterParametersFetchRepository(BaseRepository):
 
     def get_ph(self):
         query_str = "select timestamp, value from {};".format(self.config['db_tables']['ph'])
+        result = self.execute_query(query_str)
+        return result
