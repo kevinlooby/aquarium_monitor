@@ -32,8 +32,9 @@ class DFRobot_PH:
                 acidVoltageLine = acidVoltageLine.strip('acidVoltage=')
                 self._acidVoltage = float(acidVoltageLine)
         except FileNotFoundError:
-            print("phdata.txt ERROR ! Please run DFRobot_PH_Reset")
-            sys.exit(1)
+            print("phdata.txt ERROR ! Running DFRobot_PH_Reset")
+            # sys.exit(1)
+            self.reset()
 
     def read_PH(self, voltage, temperature):
         '''!

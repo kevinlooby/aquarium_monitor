@@ -35,7 +35,6 @@ def parse_temperature(content):
             t = float(text) / 1000
         except TypeError:
             t = -1
-            # print(content[1])
 
     return t
 
@@ -46,10 +45,8 @@ def write_to_db_proto(timestamp, temperature):
 
     ts = datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
-    message = "INSERT INTO temperature (timestamp, value) VALUES ('{}', {});".format(ts, temperature)
-
-    print(message)
-    ret = cursor.execute(message)
+    query = "INSERT INTO temperature (timestamp, value) VALUES ('{}', {});".format(ts, temperature)
+    ret = cursor.execute(query)
     connection.commit()
     connection.close()
 
