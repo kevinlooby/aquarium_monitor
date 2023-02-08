@@ -29,7 +29,7 @@ def main():
     while True:
         temperature = 25
 
-        ads1115.set_addr_ads1115(0x48)
+        # ads1115.set_addr_ads1115(0x48)
         ads1115.set_gain(ADS1115_REG_CONFIG_PGA_6_144V)
         adc0 = ads1115.read_voltage(0)
         ph = ph_sensor.read_PH(adc0['r'], temperature)
