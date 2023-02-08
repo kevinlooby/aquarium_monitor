@@ -4,6 +4,7 @@ from common.repositories.BaseRepository import BaseRepository
 import os
 from backend import resources
 import time
+import datetime
 
 
 class SensorRepository(BaseRepository):
@@ -15,7 +16,8 @@ class SensorRepository(BaseRepository):
         self.load_db(self.config['db_configuration'])
 
     def store_ph(self, timestamp, ph):
-        query_str = "INSERT INTO pH (timestamp, value) VALUES ({}, {});".format(int(timestamp), ph)
+        ts = datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+        query_str = "INSERT INTO pH (timestamp, value) VALUES ({}, {});".format(ts, ph)
         self.db_insert(query_str)
 
 
