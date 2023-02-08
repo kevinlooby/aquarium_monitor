@@ -17,6 +17,4 @@ class WaterParametersFetchRepository(BaseRepository):
         return result
 
     def get_ph(self):
-        n = 100
-        values = np.random.rand(10000 + n) * 3 + 5.5
-        return np.convolve(values, np.ones(n)/n, 'valid')
+        query_str = "select timestamp, value from {};".format(self.config['db_tables']['ph'])

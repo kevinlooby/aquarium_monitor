@@ -11,7 +11,7 @@ class WaterParametersFetchService(Resource):
         self.repository = WaterParametersFetchRepository(os.path.join(os.path.dirname(resources.__file__), "db_config.yml"))
 
     def get_ph(self):
-        return self.repository.get_temperature()
+        return self.repository.get_ph()
 
     def get_temperature(self):
         return self.repository.get_temperature()

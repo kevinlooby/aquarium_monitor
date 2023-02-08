@@ -28,11 +28,21 @@ $(document).ready(function () {
                         lineWidth: 1,
                         tooltip: {valueDecimals: 2},
                     },
+                    {
+                        name: 'pH',
+                        data: (() => {
+                            return data['ph'].map(function(point) {
+                            return [Date.parse(point[0]), point[1]]})
+                        })(),
+                        type: 'line',
+                        lineWidth: 1,
+                        tooltip: {valueDecimals: 2},
+                    },
                 ],
                 xAxis: {
-                    ordinal: false,
+//                    ordinal: false,
                     type: 'datetime',
-                    categories: data['temperature'][0],
+//                    categories: data['temperature'][0],
                     labels: {
                         format: '{value:%Y-%b-%e %l:%M %p }'
                     },
