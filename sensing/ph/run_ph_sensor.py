@@ -17,7 +17,7 @@ class SensorRepository(BaseRepository):
 
     def store_ph(self, timestamp, ph):
         ts = datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-        query_str = "INSERT INTO ph (timestamp, value) VALUES ({}, {});".format(ts, ph)
+        query_str = "INSERT INTO ph (timestamp, value) VALUES ('{}', {});".format(ts, ph)
         self.db_insert(query_str)
 
 
