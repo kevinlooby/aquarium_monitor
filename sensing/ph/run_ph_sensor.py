@@ -35,6 +35,7 @@ def main():
         ph = ph_sensor.read_PH(adc0['r'], temperature)
 
         repo.store_ph(time.time(), ph)
+        time.sleep(30)
 
 
 if __name__ == '__main__':
