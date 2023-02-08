@@ -69,6 +69,8 @@ class BaseRepository:
         return result
 
     def db_insert(self, query_str):
+        self.db_connect()
         success = self.db.insert_query(query_str)
+        self.db_close()
         if not success:
             raise Exception('Database insert failed.')
