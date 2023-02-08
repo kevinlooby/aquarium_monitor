@@ -2,6 +2,7 @@ import os
 import glob
 import re
 import time
+import datetime
 import pymysql
 
 
@@ -31,7 +32,7 @@ def parse_temperature(content):
     else:
         try:
             text = pattern.split(content[1])[1]
-            t = float(text) / 1000 * 9/5 + 32
+            t = float(text) / 1000
         except TypeError:
             t = -1
             # print(content[1])
@@ -42,7 +43,12 @@ def parse_temperature(content):
 def write_to_db_proto(timestamp, temperature):
     connection = pymysql.connect(user='admin', password='password', database='aquarium_monitor', host='localhost')
     cursor = connection.cursor()
-    message = "INSERT INTO temperature (timestamp, value) VALUES ({}, {});".format(int(timestamp), temperature)
+
+    ts = datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+
+    message = "INSERT INTO temperature (timestamp, value) VALUES ('{}', {});".format(ts, temperature)
+
+    print(message)
     ret = cursor.execute(message)
     connection.commit()
     connection.close()
@@ -56,7 +62,7 @@ def main():
         temp = parse_temperature(content)
         write_to_db_proto(time.time(), temp)
 
-        time.sleep(1)
+        time.sleep(30)
 
 
 if __name__ == '__main__':
