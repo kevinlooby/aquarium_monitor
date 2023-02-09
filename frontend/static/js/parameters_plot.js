@@ -11,12 +11,35 @@ $(document).ready(function () {
             $("#parameters").append('<div id="parameters_plot" style="height: 400px; min-width: 310px"></div>')
 
             Highcharts.stockChart('parameters_plot', {
-                rangeSelector: {selected: 2},
+//                rangeSelector: {selected: 2},
                 title: {text: 'Water Parameters'},
                 chart: {
                     displayErrors: true,
                     zoomType: 'x',
                 },
+                tooltip: {shared: true},
+
+                yAxis: [{
+                    title: {
+                        text: 'Water Temperature',
+                    },
+                    labels: {
+                        format: '{value} °C',
+                    },
+                    opposite: false,
+                },
+                {
+                    title: {
+                        text: 'pH',
+                    },
+                    labels: {
+                        format: '{value}',
+                    },
+                    min: 5.5,
+//                    minRange: 8,
+                    max: 8.5,
+                }],
+
                 series: [
                     {
                         name: 'Temperature',
@@ -26,7 +49,11 @@ $(document).ready(function () {
                         })(),
                         type: 'line',
                         lineWidth: 1,
-                        tooltip: {valueDecimals: 2},
+                        tooltip: {
+                            valueDecimals: 2,
+                            valueSuffix: ' °C'
+                        },
+                        yAxis: 0,
                     },
                     {
                         name: 'pH',
@@ -37,8 +64,10 @@ $(document).ready(function () {
                         type: 'line',
                         lineWidth: 1,
                         tooltip: {valueDecimals: 2},
+                        yAxis: 1,
                     },
                 ],
+
                 xAxis: {
 //                    ordinal: false,
                     type: 'datetime',
