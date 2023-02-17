@@ -14,8 +14,8 @@ def main():
 
     # Initialize sensors
     ph_sensor = PHSensorI2C()
-    temp_sensor = TempSensorW1()
-    temp_ambient_sensor = TempSensorI2C()
+    temp_sensor = TempSensorW1('28-030994974451')
+    temp_ambient_sensor = TempSensorW1('28-0309949722c2')
 
     # Sample sensors
     while True:
@@ -29,7 +29,7 @@ def main():
         repo.insert_value(timestamp, temperature, repo.db_tables['temperature'])
         repo.insert_value(timestamp, ph, repo.db_tables['ph'])
 
-        time.sleep(30)
+        time.sleep(3)
 
 
 if __name__ == '__main__':
