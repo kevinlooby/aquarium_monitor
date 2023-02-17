@@ -10,8 +10,7 @@ $(document).ready(function () {
             // Highcharts
             $("#parameters").append('<div id="parameters_plot" style="height: 400px; min-width: 310px"></div>')
 
-            Highcharts.stockChart('parameters_plot', {
-//                rangeSelector: {selected: 2},
+            const chart = Highcharts.stockChart('parameters_plot', {
                 title: {text: 'Water Parameters'},
                 chart: {
                     displayErrors: true,
@@ -19,7 +18,8 @@ $(document).ready(function () {
                 },
                 tooltip: {shared: true},
 
-                yAxis: [{
+                yAxis: [
+                {
                     title: {
                         text: 'Water Temperature',
                     },
@@ -43,6 +43,7 @@ $(document).ready(function () {
                 series: [
                     {
                         name: 'Temperature',
+                        id: 'temp',
                         data: (() => {
                             return data['temperature'].map(function(point) {
                             return [Date.parse(point[0]), point[1]]})
@@ -57,6 +58,7 @@ $(document).ready(function () {
                     },
                     {
                         name: 'pH',
+                        id: 'ph',
                         data: (() => {
                             return data['ph'].map(function(point) {
                             return [Date.parse(point[0]), point[1]]})
@@ -76,7 +78,28 @@ $(document).ready(function () {
                         format: '{value:%Y-%b-%e %l:%M %p }'
                     },
                 },
-            });
+            },
+
+                document.getElementById('temp-toggle').addEventListener('click', () => {
+                    const series = chart.get('temp');
+
+                    if (series.visible) {
+                        series.hide();
+                    } else {
+                        series.show();
+                    }
+                }),
+
+                document.getElementById('ph-toggle').addEventListener('click', () => {
+                    const series = chart.get('ph');
+
+                    if (series.visible) {
+                        series.hide();
+                    } else {
+                        series.show();
+                    }
+                }),
+            )
         }
     });
 });
