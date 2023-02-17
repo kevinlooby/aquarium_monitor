@@ -14,6 +14,8 @@ def main():
 
     # Initialize sensors
     ph_sensor = PHSensorI2C()
+
+    # These hardcoded addresses could change
     temp_sensor = TempSensorW1('28-030994974451')
     temp_ambient_sensor = TempSensorW1('28-0309949722c2')
 
@@ -23,10 +25,10 @@ def main():
 
         temperature = temp_sensor.read_value()
         temp_ambient = temp_ambient_sensor.read_value()
-        print(temp_ambient)
         ph = ph_sensor.read_value(temperature)
 
         repo.insert_value(timestamp, temperature, repo.db_tables['temperature'])
+        repo.insert_value(timestamp, temp_ambient, repo.db_tables['temp_ambient'])
         repo.insert_value(timestamp, ph, repo.db_tables['ph'])
 
         time.sleep(3)
