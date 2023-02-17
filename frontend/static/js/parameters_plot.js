@@ -54,7 +54,22 @@ $(document).ready(function () {
                             valueDecimals: 2,
                             valueSuffix: ' °C'
                         },
-                        yAxis: 0,
+                        yAxis: 1,
+                    },
+                    {
+                        name: 'Ambient Temperature',
+                        id: 'temp_ambient',
+                        data: (() => {
+                            return data['temperature_ambient'].map(function(point) {
+                            return [Date.parse(point[0]), point[1]]})
+                        })(),
+                        type: 'line',
+                        lineWidth: 1,
+                        tooltip: {
+                            valueDecimals: 2,
+                            valueSuffix: ' °C'
+                        },
+                        yAxis: 1,
                     },
                     {
                         name: 'pH',

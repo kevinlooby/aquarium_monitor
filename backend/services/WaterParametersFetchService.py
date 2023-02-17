@@ -15,3 +15,6 @@ class WaterParametersFetchService(Resource):
 
     def get_temperature(self):
         return self.repository.get_temperature()
+
+    def get_temperature_ambient(self):
+        return self.repository.get_temperature_ambient()

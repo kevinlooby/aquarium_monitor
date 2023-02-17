@@ -11,12 +11,15 @@ class WaterParametersFetchRepository(BaseRepository):
         self.load_db(self.config['db_configuration'])
 
     def get_temperature(self):
-        query_str = "select timestamp, value from {};".format(self.config['db_tables']['temperature'])
+        return self.get_parameter('temperature')
 
-        result = self.execute_query(query_str)
-        return result
+    def get_temperature_ambient(self):
+        return self.get_parameter('temp_ambient')
 
     def get_ph(self):
-        query_str = "select timestamp, value from {};".format(self.config['db_tables']['ph'])
+        return self.get_parameter('ph')
+
+    def get_parameter(self, parameter):
+        query_str = "select timestamp, value from {};".format(self.config['db_tables'][parameter])
         result = self.execute_query(query_str)
         return result

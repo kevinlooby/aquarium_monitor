@@ -12,11 +12,13 @@ class WaterParametersController(Resource):
     def get(self):
         ph = self.parameters_fetch_service.get_ph()
         temperature = self.parameters_fetch_service.get_temperature()
+        temperature_ambient = self.parameters_fetch_service.get_temperature_ambient()
 
         try:
             data = {
                 'ph': ph,
                 'temperature': temperature,
+                'temperature_ambient': temperature_ambient,
             }
 
             response = jsonify(data)
