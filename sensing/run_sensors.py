@@ -1,4 +1,4 @@
-from sensing.ph.PHSensorI2C import PHSensorI2C
+from sensing.ph.PHSensorI2C import PHSensorI2C, TempSensorI2C
 from sensing.temperature.TempSensorW1 import TempSensorW1
 from SensorRepository import SensorRepository
 from datetime import datetime
@@ -15,12 +15,15 @@ def main():
     # Initialize sensors
     ph_sensor = PHSensorI2C()
     temp_sensor = TempSensorW1()
+    temp_ambient_sensor = TempSensorI2C()
 
     # Sample sensors
     while True:
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         temperature = temp_sensor.read_value()
+        temp_ambient = temp_ambient_sensor.read_value()
+        print(temp_ambient)
         ph = ph_sensor.read_value(temperature)
 
         repo.insert_value(timestamp, temperature, repo.db_tables['temperature'])
