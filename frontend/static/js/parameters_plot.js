@@ -16,17 +16,16 @@ $(document).ready(function () {
                     displayErrors: true,
                     zoomType: 'x',
                 },
-                tooltip: {shared: true},
+
 
                 yAxis: [
                 {
                     title: {
-                        text: 'Water Temperature',
+                        text: 'Temperature',
                     },
                     labels: {
                         format: '{value} °C',
                     },
-                    opposite: false,
                 },
                 {
                     title: {
@@ -36,14 +35,14 @@ $(document).ready(function () {
                         format: '{value}',
                     },
                     min: 5.5,
-//                    minRange: 8,
                     max: 8.5,
+                    opposite: false,
                 }],
 
                 series: [
                     {
-                        name: 'Temperature',
-                        id: 'temp',
+                        name: 'Water Temperature',
+                        id: 'temp-water',
                         data: (() => {
                             return data['temperature'].map(function(point) {
                             return [Date.parse(point[0]), point[1]]})
@@ -54,11 +53,11 @@ $(document).ready(function () {
                             valueDecimals: 2,
                             valueSuffix: ' °C'
                         },
-                        yAxis: 1,
+                        yAxis: 0,
                     },
                     {
                         name: 'Ambient Temperature',
-                        id: 'temp_ambient',
+                        id: 'temp-ambient',
                         data: (() => {
                             return data['temperature_ambient'].map(function(point) {
                             return [Date.parse(point[0]), point[1]]})
@@ -69,7 +68,7 @@ $(document).ready(function () {
                             valueDecimals: 2,
                             valueSuffix: ' °C'
                         },
-                        yAxis: 1,
+                        yAxis: 0,
                     },
                     {
                         name: 'pH',
@@ -86,17 +85,28 @@ $(document).ready(function () {
                 ],
 
                 xAxis: {
-//                    ordinal: false,
+                    ordinal: false,
                     type: 'datetime',
-//                    categories: data['temperature'][0],
+//                    tickInterval: 6 * 3600 * 1000,
                     labels: {
                         format: '{value:%Y-%b-%e %l:%M %p }'
                     },
                 },
+                tooltip: {shared: true},
             },
 
-                document.getElementById('temp-toggle').addEventListener('click', () => {
-                    const series = chart.get('temp');
+                document.getElementById('temp-water-toggle').addEventListener('click', () => {
+                    const series = chart.get('temp-water');
+
+                    if (series.visible) {
+                        series.hide();
+                    } else {
+                        series.show();
+                    }
+                }),
+
+                document.getElementById('temp-ambient-toggle').addEventListener('click', () => {
+                    const series = chart.get('temp-ambient');
 
                     if (series.visible) {
                         series.hide();

@@ -57,14 +57,21 @@
                     </li>
                 </ul>
                 <ul class="nav flex-column">
-                    <li class="nav-item">
+                    <li class="nav-item" id="temp-water-toggle">
                         <a class="nav-link active" aria-current="page" href="#">
-                            Temperature
+                            Water Temperature
                         </a>
                     </li>
                 </ul>
                 <ul class="nav flex-column">
-                    <li class="nav-item">
+                    <li class="nav-item" id="temp-ambient-toggle">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            Ambient Temperature
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav flex-column">
+                    <li class="nav-item" id="ph-toggle">
                         <a class="nav-link active" aria-current="page" href="#">
                             pH
                         </a>
@@ -76,7 +83,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     {% block content %}
     {% endblock %}
 </div>
