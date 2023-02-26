@@ -9,6 +9,6 @@ class SensorRepository(BaseRepository):
         self.db_tables = self.config['db_tables']
         self.load_db(self.config['db_configuration'])
 
-    def insert_value(self, timestamp, value, table):
-        query_str = "INSERT INTO {} (timestamp, value) VALUES ('{}', {});".format(table, timestamp, value)
+    def insert_value(self, timestamp, value, table, column='value'):
+        query_str = f"INSERT INTO {table} (timestamp, {column}) VALUES ('{timestamp}', {value});"
         self.db_insert(query_str)

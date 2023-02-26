@@ -19,17 +19,24 @@ def main():
     temp_sensor = TempSensorW1('28-030994974451')
     temp_ambient_sensor = TempSensorW1('28-0309949722c2')
 
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    repo.insert_value(timestamp, None, repo.db_tables['temperature'])
+    repo.insert_value(timestamp, None, repo.db_tables['temp_ambient'])
+    repo.insert_value(timestamp, None, repo.db_tables['ph'])
+    repo.insert_value(timestamp, None, repo.db_tables['ph_probe_voltage'], 'ph_probe_voltage')
+
     # Sample sensors
     while True:
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         temperature = temp_sensor.read_value()
         temp_ambient = temp_ambient_sensor.read_value()
-        ph = ph_sensor.read_value(temperature)
+        ph, ph_probe_voltage = ph_sensor.read_value(temperature)
 
         repo.insert_value(timestamp, temperature, repo.db_tables['temperature'])
         repo.insert_value(timestamp, temp_ambient, repo.db_tables['temp_ambient'])
         repo.insert_value(timestamp, ph, repo.db_tables['ph'])
+        repo.insert_value(timestamp, ph_probe_voltage, repo.db_tables['ph_probe_voltage'])
 
         time.sleep(3)
 
