@@ -23,7 +23,7 @@ def main():
     repo.insert_value(timestamp, "NULL", repo.db_tables['temperature'])
     repo.insert_value(timestamp, "NULL", repo.db_tables['temp_ambient'])
     repo.insert_value(timestamp, "NULL", repo.db_tables['ph'])
-    repo.insert_value(timestamp, "NULL", repo.db_tables['ph_probe_voltage'], 'probe_voltage')
+    repo.insert_value(timestamp, "NULL", repo.db_tables['ph_probe_voltage'])
 
     # Sample sensors
     while True:
@@ -36,7 +36,7 @@ def main():
         repo.insert_value(timestamp, temperature, repo.db_tables['temperature'])
         repo.insert_value(timestamp, temp_ambient, repo.db_tables['temp_ambient'])
         repo.insert_value(timestamp, ph, repo.db_tables['ph'])
-        repo.insert_value(timestamp, ph_probe_voltage, repo.db_tables['ph_probe_voltage'], 'probe_voltage')
+        repo.insert_value(timestamp, ph_probe_voltage, repo.db_tables['ph_probe_voltage'])
 
         time.sleep(3)
 
