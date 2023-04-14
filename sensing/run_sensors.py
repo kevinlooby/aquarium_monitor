@@ -38,7 +38,7 @@ def main():
         repo.insert_value(timestamp, ph, repo.db_tables['ph'])
         repo.insert_value(timestamp, ph_probe_voltage, repo.db_tables['ph_probe_voltage'])
 
-        time.sleep(3)
+        time.sleep(30)
 
 
 if __name__ == '__main__':

@@ -16,7 +16,7 @@ class DFRobot_PH:
     def __init__(self):
         self._temperature = 25.0
         self._acidVoltage = 2032.44
-        self._neutral_voltage = 1500.0
+        self._neutralVoltage = 1500.0
 
     def begin(self):
         '''!
@@ -24,7 +24,7 @@ class DFRobot_PH:
         '''
 
         try:
-            with open('phdata.txt', 'r') as f:
+            with open('/home/pi/aquarium_monitor/sensing/ph/phdata.txt', 'r') as f:
                 neutralVoltageLine = f.readline()
                 neutralVoltageLine = neutralVoltageLine.strip('neutralVoltage=')
                 self._neutralVoltage = float(neutralVoltageLine)
@@ -35,6 +35,8 @@ class DFRobot_PH:
             print("phdata.txt ERROR ! Running DFRobot_PH_Reset")
             # sys.exit(1)
             self.reset()
+
+        print('{} {}'.format(self._neutralVoltage, self._acidVoltage))
 
     def read_PH(self, voltage, temperature):
         '''!
@@ -56,7 +58,7 @@ class DFRobot_PH:
           @brief   Calibrate the calibration data.
           @param voltage       Voltage value
         '''
-        if 1322 < voltage < 1678:
+        if 1100 < voltage < 1500:
             print(">>>Buffer Solution:7.0")
             f = open('phdata.txt', 'r+')
             flist = f.readlines()
@@ -66,7 +68,7 @@ class DFRobot_PH:
             f.close()
             print(">>>PH:7.0 Calibration completed,Please enter Ctrl+C exit calibration in 5 seconds")
             time.sleep(5.0)
-        elif 1854 < voltage < 2210:
+        elif 1800 < voltage < 2210:
             print(">>>Buffer Solution:4.0")
             f = open('phdata.txt', 'r+')
             flist = f.readlines()
